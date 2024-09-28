@@ -30,7 +30,7 @@ class SmsRetrieverPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
         PluginRegistry.ActivityResultListener {
 
     private lateinit var mContext: Context
-    private var mActivity: FlutterActivity? = null
+    private var mActivity: Activity? = null
     private var mBinding: ActivityPluginBinding? = null
     private var mChannel: MethodChannel? = null
 
@@ -75,13 +75,13 @@ class SmsRetrieverPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
     }
 
     override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
-        mActivity = binding.activity as FlutterActivity
+        mActivity = binding.activity
         mBinding = binding
         binding.addActivityResultListener(this)
     }
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
-        mActivity = binding.activity as FlutterActivity
+        mActivity = binding.activity
         mBinding = binding
         binding.addActivityResultListener(this)
     }
@@ -132,7 +132,7 @@ class SmsRetrieverPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
                                     pendingResult = result
                                     if (mActivity != null) {
                                         e.startResolutionForResult(
-                                                mActivity as Activity,
+                                                mActivity,
                                                 STORE_PHONE_NUMBER_REQUEST
                                         )
                                     }
@@ -177,7 +177,7 @@ class SmsRetrieverPlugin : FlutterPlugin, MethodCallHandler, ActivityAware,
                                             pendingResult = result
                                             if (mActivity != null) {
                                                 e.startResolutionForResult(
-                                                        mActivity as Activity,
+                                                        mActivity,
                                                         RETRIEVE_PHONE_NUMBER_REQUEST
                                                 )
                                             }
